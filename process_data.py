@@ -62,9 +62,10 @@ from sklearn.preprocessing import MinMaxScaler
 import random
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-
+import ssl
 from io import BytesIO
 from zipfile import ZipFile
+import urllib
 from urllib.request import urlopen
 from urllib.request import urlopen
 import zipfile, io
@@ -72,9 +73,13 @@ import zipfile, io
 random.seed(10)
 
 def load_data():
+    context = ssl._create_unverified_context()
+    
     url = "https://iotanalytics.unsw.edu.au/iottestbed/csv/16-09-23.csv.zip"
-        
-    archive = zipfile.ZipFile(io.BytesIO(urlopen(url).read())) # Takes some time
+
+    f = urlopen(url, context=context)      
+
+    archive = zipfile.ZipFile(io.BytesIO(f.read())) # Takes some time
     
     csv_path = archive.namelist()
     
@@ -153,4 +158,6 @@ def train_test_validation_set_split(x, y, train_ratio, test_ratio, validation_ra
     #print(X)
     #print(y)
     #download_data()
+    
+
     
