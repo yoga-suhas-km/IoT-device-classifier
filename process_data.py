@@ -63,10 +63,22 @@ import random
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 
+from io import BytesIO
+from zipfile import ZipFile
+from urllib.request import urlopen
+from urllib.request import urlopen
+import zipfile, io
+
 random.seed(10)
 
 def load_data():
-    df = pd.read_csv("data.csv")
+    url = "https://iotanalytics.unsw.edu.au/iottestbed/csv/16-09-23.csv.zip"
+        
+    archive = zipfile.ZipFile(io.BytesIO(urlopen(url).read())) # Takes some time
+    
+    csv_path = archive.namelist()
+    
+    df = pd.read_csv(io.BytesIO(archive.read(csv_path[0])))
     
     
     labelencoder = LabelEncoder()
@@ -135,9 +147,10 @@ def train_test_validation_set_split(x, y, train_ratio, test_ratio, validation_ra
 
 
 
-    
-    
-
 if __name__ == "__main__":
-    load_data()
+    #X,y = load_data()
+    
+    #print(X)
+    #print(y)
+    #download_data()
     
