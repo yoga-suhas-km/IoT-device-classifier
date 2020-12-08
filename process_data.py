@@ -147,7 +147,7 @@ def train_test_validation_set_split(x, y, train_ratio, test_ratio, validation_ra
 
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #X,y = load_data()
     
     #print(X)
