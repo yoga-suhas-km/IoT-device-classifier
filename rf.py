@@ -15,14 +15,16 @@ def model(x_train, x_test, x_valid, y_train, y_test, y_valid, channel):
     regressor.fit(x_train, y_train)
     """
     
-    
-    with open('rf_10', 'rb') as f:
+    path, dirs, file = next(os.walk("."))
+    print(file)
+
+    with open('IoT-device-classifier/rf_10', 'rb') as f:
         rf_10 = cPickle.load(f)
 
-    with open('rf_100', 'rb') as f:
+    with open('IoT-device-classifier/rf_100', 'rb') as f:
         rf_100 = cPickle.load(f)    
 
-    with open('rf_1000', 'rb') as f:
+    with open('IoT-device-classifier/rf_1000', 'rb') as f:
         rf_1000 = cPickle.load(f)         
 
 
